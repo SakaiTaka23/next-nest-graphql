@@ -1,11 +1,9 @@
 type User {
-  # Example field (placeholder)
-  exampleField: Int
+  id: Int!
 }
 
 input CreateUserInput {
-  # Example field (placeholder)
-  exampleField: Int
+  id: Int!
 }
 
 input UpdateUserInput {

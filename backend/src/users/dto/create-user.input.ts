@@ -1,1 +1,3 @@
-export class CreateUserInput {}
+export class CreateUserInput {
+  id: number;
+}

@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  back:
+    build:
+      context: 'backend'
+      target: dev
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app

@@ -10,7 +10,7 @@ services:
       - ./backend:/app
   front:
     build:
-      context: './frontend'
+      context: 'frontend'
       target: dev
     ports:
       - 3000:3000
@@ -18,3 +18,14 @@ services:
       - ./frontend:/app
     depends_on:
       - back
+  # db:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+  #     MYSQL_DATABASE: '${DB_DATABASE}'
+  #     MYSQL_USER: '${DB_USERNAME}'
+  #     MYSQL_PASSWORD: '${DB_PASSWORD}'
+  #     TZ: 'Asia/Tokyo'
+  #   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  #   ports:
+  #     - 3306:3306

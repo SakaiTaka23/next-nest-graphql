@@ -8,3 +8,13 @@ services:
       - 5000:5000
     volumes:
       - ./backend:/app
+  front:
+    build:
+      context: './frontend'
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - back

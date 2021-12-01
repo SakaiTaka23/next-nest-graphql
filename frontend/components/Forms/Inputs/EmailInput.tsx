@@ -1,20 +1,31 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const EmailInput = () => {
-  const { register } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <TextField
-      margin='normal'
-      placeholder='Email Address *'
-      fullWidth
-      {...register('email', {
-        required: true,
-        pattern: /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-      })}
-    />
+    <>
+      <Controller
+        control={control}
+        defaultValue=''
+        name='email'
+        rules={{
+          required: true,
+          pattern: /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
+        }}
+        render={({ field }) => <TextField {...field} margin='normal' placeholder='Email Address *' fullWidth />}
+      />
+      {errors.email && (
+        <Typography color='error' variant='overline'>
+          required and must be valid email
+        </Typography>
+      )}
+    </>
   );
 };
 

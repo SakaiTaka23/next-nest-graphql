@@ -1,21 +1,32 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const PasswordInput = () => {
-  const { register } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <TextField
-      margin='normal'
-      placeholder='Password *'
-      fullWidth
-      {...register('password', {
-        required: true,
-        minLength: 8,
-        maxLength: 16,
-      })}
-    />
+    <>
+      <Controller
+        control={control}
+        defaultValue=''
+        name='password'
+        rules={{
+          required: true,
+          minLength: 8,
+          maxLength: 16,
+        }}
+        render={({ field }) => <TextField {...field} margin='normal' placeholder='Password *' fullWidth />}
+      />
+      {errors.password && (
+        <Typography color='error' variant='overline'>
+          required and must be 8~16 words long
+        </Typography>
+      )}
+    </>
   );
 };
 

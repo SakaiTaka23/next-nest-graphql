@@ -1,21 +1,32 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const NameInput = () => {
-  const { register } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <TextField
-      margin='normal'
-      placeholder='Name *'
-      fullWidth
-      {...register('name', {
-        required: true,
-        minLength: 1,
-        maxLength: 20,
-      })}
-    />
+    <>
+      <Controller
+        control={control}
+        defaultValue=''
+        name='name'
+        rules={{
+          required: true,
+          minLength: 1,
+          maxLength: 20,
+        }}
+        render={({ field }) => <TextField {...field} margin='normal' placeholder='Name *' fullWidth />}
+      />
+      {errors.name && (
+        <Typography color='error' variant='overline'>
+          required and must be 1~20 words long
+        </Typography>
+      )}
+    </>
   );
 };
 

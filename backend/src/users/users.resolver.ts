@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UsersService } from './users.service';
@@ -12,6 +14,7 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
+  @UseGuards(FirebaseAuthGuard)
   @Query('users')
   findAll() {
     return this.usersService.findAll();

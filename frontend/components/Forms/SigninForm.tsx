@@ -3,15 +3,23 @@ import Container from '@mui/material/Container';
 import { Box } from '@mui/system';
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useFirebase } from '../../firebase/useFirebase';
 import SubmitButton from './Button/SubmitButton';
 import EmailInput from './Inputs/EmailInput';
 import PasswordInput from './Inputs/PasswordInput';
+import AuthLinks from './Providers/AuthLinks';
+
+type SubmitData = {
+  email: string;
+  password: string;
+};
 
 export default function SignInForm() {
   const methods = useForm();
+  const { SignIn } = useFirebase();
 
-  const submit = (data: any) => {
-    console.log(data);
+  const submit = (data: SubmitData) => {
+    SignIn(data.email, data.password);
   };
 
   return (
@@ -36,6 +44,7 @@ export default function SignInForm() {
             <SubmitButton />
           </Box>
         </FormProvider>
+        <AuthLinks />
       </Box>
     </Container>
   );

@@ -1,4 +1,5 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { CacheProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -14,8 +15,22 @@ interface MyAppProps extends AppProps {
   emotionCache?: any;
 }
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: 'http://127.0.0.1:5000/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('firebase-authentication-jwt');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
   connectToDevTools: true,
 });

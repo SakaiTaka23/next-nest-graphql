@@ -3,6 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import { AuthProvider } from '../firebase/authContext';
 import createEmotionCache from '../theme/createEmotionCache';
 import theme from '../theme/theme';
 
@@ -26,9 +27,11 @@ function App(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ApolloProvider client={client}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <AuthProvider>
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </AuthProvider>
       </ThemeProvider>
     </CacheProvider>
   );

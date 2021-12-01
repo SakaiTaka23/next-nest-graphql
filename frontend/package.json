@@ -12,6 +12,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.5",
+    "@emotion/cache": "^11.6.0",
+    "@emotion/react": "^11.7.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.2",
     "graphql": "^16.0.1",
     "next": "12.0.4",
     "react": "17.0.2",
@@ -19,15 +24,15 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.3.0",
+    "@graphql-codegen/typescript": "2.4.1",
+    "@graphql-codegen/typescript-operations": "2.2.1",
+    "@graphql-codegen/typescript-react-apollo": "3.2.2",
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.0",
-    "typescript": "4.5.2",
-    "@graphql-codegen/typescript-react-apollo": "3.2.2",
-    "@graphql-codegen/typescript": "2.4.1",
-    "@graphql-codegen/typescript-operations": "2.2.1"
+    "typescript": "4.5.2"
   }
 }

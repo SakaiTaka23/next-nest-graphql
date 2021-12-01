@@ -1,16 +1,36 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { CacheProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import createEmotionCache from '../theme/createEmotionCache';
+import theme from '../theme/theme';
 
-function App({ Component, pageProps }: AppProps) {
-  const client = new ApolloClient({
-    uri: 'http://127.0.0.1:5000/graphql',
-    cache: new InMemoryCache(),
-    connectToDevTools: true,
-  });
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: any;
+}
+
+const client = new ApolloClient({
+  uri: 'http://127.0.0.1:5000/graphql',
+  cache: new InMemoryCache(),
+  connectToDevTools: true,
+});
+
+function App(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

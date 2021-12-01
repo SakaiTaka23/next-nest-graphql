@@ -1,26 +1,17 @@
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  CssBaseline,
-  FormControlLabel,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Avatar, CssBaseline, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/system';
 import * as React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import SubmitButton from './Button/SubmitButton';
+import EmailInput from './Inputs/EmailInput';
+import PasswordInput from './Inputs/PasswordInput';
 
 export default function SignInForm() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const methods = useForm();
+
+  const submit = (data: any) => {
+    console.log(data);
   };
 
   return (
@@ -34,36 +25,17 @@ export default function SignInForm() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>{/* <LockOutlinedIcon /> */}</Avatar>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} />
         <Typography component='h1' variant='h5'>
-          Sign in
+          Sign In
         </Typography>
-        <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
-            autoFocus
-          />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='password'
-            autoComplete='current-password'
-          />
-          <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-          <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-            Sign In
-          </Button>
-        </Box>
+        <FormProvider {...methods}>
+          <Box component='form' onSubmit={methods.handleSubmit(submit)} sx={{ mt: 3 }}>
+            <EmailInput />
+            <PasswordInput />
+            <SubmitButton />
+          </Box>
+        </FormProvider>
       </Box>
     </Container>
   );

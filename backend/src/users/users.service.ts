@@ -5,21 +5,19 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  create() {
+  create(id: string) {
     return this.prisma.user.create({
-      data: {},
-    });
-  }
-
-  findOne(id: number) {
-    return this.prisma.user.findUnique({
-      where: {
+      data: {
         id,
       },
     });
   }
 
-  findFromToken() {
-    return;
+  findOne(id: string) {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 }

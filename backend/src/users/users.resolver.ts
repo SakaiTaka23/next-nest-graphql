@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { CurrentUserID } from 'src/auth/current-user.decorator';
 import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 import { UsersService } from './users.service';
 
@@ -9,18 +10,19 @@ export class UsersResolver {
 
   @UseGuards(FirebaseAuthGuard)
   @Mutation('createUser')
-  create() {
-    return this.usersService.create();
+  create(@CurrentUserID() id: string) {
+    console.log(id);
+    return this.usersService.create(id);
   }
 
   @Query('user')
-  findOne(@Args('id') id: number) {
+  findOne(@Args('id') id: string) {
     return this.usersService.findOne(id);
   }
 
   @UseGuards(FirebaseAuthGuard)
   @Query('userFromToken')
-  findFromToken() {
-    return this.usersService.findFromToken();
+  findFromToken(@CurrentUserID() id: string) {
+    return this.usersService.findOne(id);
   }
 }

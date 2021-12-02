@@ -1,18 +1,10 @@
 type User {
-  id: Int!
-}
-
-input CreateUserInput {
-  id: Int!
-}
-
-input UpdateUserInput {
-  id: Int!
+  id: String!
 }
 
 type Query {
   userFromToken: User!
-  user(id: Int!): User
+  user(id: String!): User
 }
 
 type Mutation {

@@ -5,7 +5,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions = {};
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,65 +15,52 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreateUserInput = {
-  id: Scalars['Int'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User;
-  removeUser?: Maybe<User>;
-  updateUser: User;
-};
-
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
-};
-
-export type MutationRemoveUserArgs = {
-  id: Scalars['Int'];
-};
-
-export type MutationUpdateUserArgs = {
-  updateUserInput: UpdateUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
-  users: Array<Maybe<User>>;
+  userFromToken: User;
 };
+
 
 export type QueryUserArgs = {
-  id: Scalars['Int'];
-};
-
-export type UpdateUserInput = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
-export type CreateUserMutationVariables = Exact<{
-  createUserInput: CreateUserInput;
+export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: string } };
+
+export type UserFromTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserFromTokenQuery = { __typename?: 'Query', userFromToken: { __typename?: 'User', id: string } };
+
+export type UserFromIdQueryVariables = Exact<{
+  userId: Scalars['String'];
 }>;
 
-export type CreateUserMutation = { __typename?: 'Mutation'; createUser: { __typename?: 'User'; id: number } };
 
-export type UsersQueryVariables = Exact<{ [key: string]: never }>;
+export type UserFromIdQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string } | null | undefined };
 
-export type UsersQuery = { __typename?: 'Query'; users: Array<{ __typename?: 'User'; id: number } | null | undefined> };
 
 export const CreateUserDocument = gql`
-  mutation CreateUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
-      id
-    }
+    mutation CreateUser {
+  createUser {
+    id
   }
-`;
+}
+    `;
 export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
 
 /**
@@ -89,50 +76,82 @@ export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, C
  * @example
  * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
  *   variables: {
- *      createUserInput: // value for 'createUserInput'
  *   },
  * });
  */
-export function useCreateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
-}
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
-export const UsersDocument = gql`
-  query Users {
-    users {
-      id
-    }
+export const UserFromTokenDocument = gql`
+    query UserFromToken {
+  userFromToken {
+    id
   }
-`;
+}
+    `;
 
 /**
- * __useUsersQuery__
+ * __useUserFromTokenQuery__
  *
- * To run a query within a React component, call `useUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useUserFromTokenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserFromTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useUsersQuery({
+ * const { data, loading, error } = useUserFromTokenQuery({
  *   variables: {
  *   },
  * });
  */
-export function useUsersQuery(baseOptions?: Apollo.QueryHookOptions<UsersQuery, UsersQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<UsersQuery, UsersQueryVariables>(UsersDocument, options);
+export function useUserFromTokenQuery(baseOptions?: Apollo.QueryHookOptions<UserFromTokenQuery, UserFromTokenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserFromTokenQuery, UserFromTokenQueryVariables>(UserFromTokenDocument, options);
+      }
+export function useUserFromTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserFromTokenQuery, UserFromTokenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserFromTokenQuery, UserFromTokenQueryVariables>(UserFromTokenDocument, options);
+        }
+export type UserFromTokenQueryHookResult = ReturnType<typeof useUserFromTokenQuery>;
+export type UserFromTokenLazyQueryHookResult = ReturnType<typeof useUserFromTokenLazyQuery>;
+export type UserFromTokenQueryResult = Apollo.QueryResult<UserFromTokenQuery, UserFromTokenQueryVariables>;
+export const UserFromIdDocument = gql`
+    query UserFromID($userId: String!) {
+  user(id: $userId) {
+    id
+  }
 }
-export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UsersQuery, UsersQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UsersQuery, UsersQueryVariables>(UsersDocument, options);
-}
-export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
-export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
-export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
+    `;
+
+/**
+ * __useUserFromIdQuery__
+ *
+ * To run a query within a React component, call `useUserFromIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserFromIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserFromIdQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useUserFromIdQuery(baseOptions: Apollo.QueryHookOptions<UserFromIdQuery, UserFromIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserFromIdQuery, UserFromIdQueryVariables>(UserFromIdDocument, options);
+      }
+export function useUserFromIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserFromIdQuery, UserFromIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserFromIdQuery, UserFromIdQueryVariables>(UserFromIdDocument, options);
+        }
+export type UserFromIdQueryHookResult = ReturnType<typeof useUserFromIdQuery>;
+export type UserFromIdLazyQueryHookResult = ReturnType<typeof useUserFromIdLazyQuery>;
+export type UserFromIdQueryResult = Apollo.QueryResult<UserFromIdQuery, UserFromIdQueryVariables>;

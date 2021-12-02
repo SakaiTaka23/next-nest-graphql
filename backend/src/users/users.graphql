@@ -11,12 +11,10 @@ input UpdateUserInput {
 }
 
 type Query {
-  users: [User]!
+  userFromToken: User!
   user(id: Int!): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User
+  createUser: User!
 }

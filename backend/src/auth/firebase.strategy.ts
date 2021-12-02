@@ -13,18 +13,17 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
     });
   }
 
-  async validate(req: Request): Promise<admin.auth.DecodedIdToken> {
+  async validate(req: Request): Promise<string> {
     const auth_header: string = req.headers['authorization'];
     if (!auth_header) throw new UnauthorizedException();
     const token = auth_header.replace('Bearer ', '');
-    console.log(`header token ${token}`);
     const decodedToken = await admin
       .auth()
       .verifyIdToken(token)
       .catch(() => {
         throw new UnauthorizedException();
       });
-    console.log(`decoded ${decodedToken}`);
-    return decodedToken;
+    console.log(`decoded ${decodedToken.uid}`);
+    return decodedToken.uid;
   }
 }

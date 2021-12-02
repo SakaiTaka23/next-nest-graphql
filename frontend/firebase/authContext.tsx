@@ -15,16 +15,18 @@ const AuthContext = createContext({} as AuthContextState);
 const AuthProvider: VFC<Props> = ({ children }) => {
   const firebaseAuth = getAuth(firebaseApp);
   const [userID, setUserID] = useState('');
+  const tokenStorageKey = 'firebase-authentication-jwt';
 
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
         setUserID(user.uid);
         user.getIdToken().then((idToken) => {
-          localStorage.setItem('firebase-authentication-jwt', idToken);
+          localStorage.setItem(tokenStorageKey, idToken);
         });
       } else {
         setUserID('');
+        localStorage.removeItem(tokenStorageKey);
       }
     });
   });

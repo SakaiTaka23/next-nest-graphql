@@ -28,9 +28,13 @@ const useFirebase = () => {
   };
 
   const SignIn = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(firebaseAuth, email, password).catch((error) => {
-      alert(error);
-    });
+    await signInWithEmailAndPassword(firebaseAuth, email, password)
+      .then(() => {
+        router.replace('/private');
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const SignInGoogle = () => {

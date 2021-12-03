@@ -1,29 +1,34 @@
 # next-nest-graphql
 
-- next-nest 用のテンプレートを作る
+- template for next-nest-graphql
 
-## TODO
 
-- [x] 両方で lint format あたりを整える
-- [x] next nest 間で graphql で通信できることを確認
-- [x] Docker 上で通信できることを確認
-- [x] DB を mysql に変更
-- [x] Firebase auth を取り入れてルートプロテクト実装
-- [ ] フロントのデザイン・設定見直し
-- [ ] README に情報を書く
 
-## Firebase auth
+## Technologies
 
-動作確認の方針
+### Common
 
-1. クライアントでユーザーを作成できるようにする
-2. トークンを取得
-3. バックエンドにリクエストを送れるか検証
+- Docker
+- ESLint
+- Firebase Authentication
+- GraphQL
+- Prettier
+- TypeScript
 
-## フロントエンドの方針
+### Backend
 
-- [x] firebase と接続
-- [x] apollo でヘッダーの送信方法を調査
-- [x] バックにユーザー作成 API 実装
-- [x] ユーザを作ってバックに保存されていることを確認
-- [x] フロントエンドと組み合わせる
+- Apollo Server
+- Nest.js
+- Passport.js
+- Prisma
+
+### Frontend
+
+- Apollo Client
+- MUI
+- Next.js
+- React Hook Form
+
+
+
+## Getting Started

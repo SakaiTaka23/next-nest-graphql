@@ -1,31 +1,36 @@
 version: '3.8'
 services:
-  back:
-    build:
-      context: 'backend'
-      target: dev
-    ports:
-      - 5000:5000
-    volumes:
-      - ./backend:/app
-  front:
-    build:
-      context: 'frontend'
-      target: dev
-    ports:
-      - 3000:3000
-    volumes:
-      - ./frontend:/app
-    depends_on:
-      - back
-  # db:
-  #   image: mysql:8.0
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-  #     MYSQL_DATABASE: '${DB_DATABASE}'
-  #     MYSQL_USER: '${DB_USERNAME}'
-  #     MYSQL_PASSWORD: '${DB_PASSWORD}'
-  #     TZ: 'Asia/Tokyo'
-  #   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  # back:
+  #   build:
+  #     context: 'backend'
+  #     target: dev
   #   ports:
-  #     - 3306:3306
+  #     - 5000:5000
+  #   volumes:
+  #     - ./backend:/app
+  #   depends_on:
+  #     - db
+  # front:
+  #   build:
+  #     context: 'frontend'
+  #     target: dev
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./frontend:/app
+  #   depends_on:
+  #     - back
+  db:
+    image: mysql:8.0
+    command: mysqld
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf

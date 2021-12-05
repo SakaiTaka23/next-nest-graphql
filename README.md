@@ -27,8 +27,6 @@
 - Next.js
 - React Hook Form
 
-## 
-
 ## Getting Started
 
 1. Install packages
@@ -46,6 +44,7 @@ yarn install
 ```
 
 2. create .env files and set up firebase
+
 - set firebase adminsdk as filename "firebase-adminsdk.json" in the src/auth folder
 
 ```shell
@@ -80,3 +79,9 @@ yarn dev
 # terminal 2
 yarn dev
 ```
+
+TODO
+
+- [ ] プロダクション時の挙動確認
+- [ ] プロジェクトの初期設定をまとめて試す
+- [ ] バックエンドの API をまとめておく

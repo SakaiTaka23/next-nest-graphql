@@ -7,6 +7,8 @@ COPY prisma ./prisma/
 
 RUN yarn install
 
+COPY . .
+
 EXPOSE 5000
 
 CMD ["yarn", "dev"]
@@ -21,15 +23,20 @@ COPY prisma ./prisma/
 
 RUN yarn install
 
+COPY . .
+
 CMD [ "yarn", "build"]
 
 
 FROM node:16-alpine AS production
 
-COPY --from=builder /app/node_modules ./node_modules
+ENV NODE_ENV=production
+
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
 COPY --from=builder /app/dist ./dist
+
+RUN yarn install
 
 EXPOSE 5000
 CMD [ "npm", "run", "start:prod" ]

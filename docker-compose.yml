@@ -3,7 +3,7 @@ services:
   back:
     build:
       context: 'backend'
-      target: production
+      target: dev
     ports:
       - 5000:5000
     volumes:
@@ -13,7 +13,7 @@ services:
   front:
     build:
       context: 'frontend'
-      target: production
+      target: dev
     ports:
       - 3000:3000
     volumes:

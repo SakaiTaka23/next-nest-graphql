@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserFromTokenQuery } from '../graphql/generated';
+import { useUserFromTokenQuery } from '@/graphql/generated';
 
 const Private = () => {
   const { data, loading, error } = useUserFromTokenQuery();

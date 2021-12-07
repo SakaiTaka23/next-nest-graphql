@@ -3,11 +3,11 @@ import Container from '@mui/material/Container';
 import { Box } from '@mui/system';
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useFirebase } from '../../firebase/useFirebase';
 import SubmitButton from './Button/SubmitButton';
 import EmailInput from './Inputs/EmailInput';
 import PasswordInput from './Inputs/PasswordInput';
 import AuthLinks from './Providers/AuthLinks';
+import { useFirebase } from '@/firebase/useFirebase';
 
 type SubmitData = {
   email: string;

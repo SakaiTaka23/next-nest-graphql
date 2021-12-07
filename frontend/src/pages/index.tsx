@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useUserFromIdQuery } from '../graphql/generated';
+import { useUserFromIdQuery } from '@/graphql/generated';
 
 const Home: NextPage = () => {
   const { data, loading, error } = useUserFromIdQuery({

@@ -4,7 +4,7 @@ import { createTheme, CssBaseline, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import { useEffect, useMemo } from 'react';
-import { AuthProvider } from '../firebase/authContext';
+import { AuthProvider } from '@/firebase/authContext';
 
 const httpLink = createHttpLink({
   uri: 'http://127.0.0.1:5000/graphql',

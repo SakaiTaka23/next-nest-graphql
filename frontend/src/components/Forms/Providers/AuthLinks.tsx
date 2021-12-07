@@ -1,6 +1,6 @@
 import { Button, Grid } from '@mui/material';
 import React from 'react';
-import { useFirebase } from '../../../firebase/useFirebase';
+import { useFirebase } from '@/firebase/useFirebase';
 
 const AuthLinks = () => {
   const { SignInGoogle } = useFirebase();

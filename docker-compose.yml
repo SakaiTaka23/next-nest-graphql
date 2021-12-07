@@ -1,25 +1,25 @@
 version: '3.8'
 services:
-  # back:
-  #   build:
-  #     context: 'backend'
-  #     target: dev
-  #   ports:
-  #     - 5000:5000
-  #   volumes:
-  #     - ./backend:/app
-  #   depends_on:
-  #     - db
-  # front:
-  #   build:
-  #     context: 'frontend'
-  #     target: dev
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - ./frontend:/app
-  #   depends_on:
-  #     - back
+  back:
+    build:
+      context: 'backend'
+      target: production
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+  front:
+    build:
+      context: 'frontend'
+      target: production
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - back
   db:
     image: mysql:8.0
     command: mysqld

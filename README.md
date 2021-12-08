@@ -29,64 +29,56 @@
 
 ## Getting Started
 
-1. Install packages
+1. execute command
+- for docker
 
 ```shell
-# terminal 1
-cd backend
-yarn install
+make install-docker
 ```
+
+- for local
 
 ```shell
-# terminal 2
-cd frontend
-yarn install
+make install-local
 ```
 
-2. create .env files and set up firebase
-
-- set firebase adminsdk as filename "firebase-adminsdk.json" in the src/auth folder
-
-```shell
-# terminal 1
-cp .env.example .env
-```
-
-- set firebase key in the .env file
-
-```shell
-# terminal 2
-cp .env.example .env
-```
+2. set up firebase
+- set firebase adminsdk as filename "firebase-adminsdk.json" in the src/auth folder(backend)
+- set firebase key in the .env file(frontend)
 
 3. start the server
 
 **with docker**
 
 ```shell
-docker compose build
 docker compose up
 ```
 
 **local**
 
 ```shell
-# terminal 1
+cd backend
 yarn dev
 ```
 
 ```shell
-# terminal 2
+cd frontend
 yarn dev
 ```
 
-## TODO
 
-- [x] プロダクション時の挙動確認
-- [ ] プロジェクトの初期設定をまとめて試す
-- [ ] バックエンドの API をまとめておく
 
-## DB について
+## Migration
 
-- 開発・本番で環境を分けるのは切り替えが難しそう
-- 開発中は DB のみコンテナにしたらいいかも
+- in backend
+- for docker execute this command inside backend container
+
+```shell
+yarn prisma db push
+```
+
+
+
+## Production(Docker)
+
+- change docker-compose target to 'production'

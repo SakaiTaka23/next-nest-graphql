@@ -1,4 +1,6 @@
-FROM node:16-alpine AS dev
+FROM node:17 AS dev
+
+RUN apt-get update && apt-get install -y netcat
 
 WORKDIR /app
 
@@ -11,10 +13,10 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["yarn", "dev"]
+CMD ["bash", "./wait-db.sh", "yarn", "dev"]
 
 
-FROM node:16-alpine AS builder
+FROM node:17 AS builder
 
 WORKDIR /app
 
@@ -28,7 +30,7 @@ COPY . .
 RUN yarn build
 
 
-FROM node:16-alpine AS production
+FROM node:17 AS production
 
 WORKDIR /app
 
@@ -42,4 +44,4 @@ RUN yarn install --frozen-lockfile
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 5000
-CMD [ "yarn", "start:prod" ]
+CMD ["bash", "./wait-db.sh", "yarn", "start:prod" ]

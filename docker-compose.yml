@@ -22,6 +22,7 @@ services:
       - back
   db:
     image: mysql:8.0
+    platform: linux/x86_64
     command: mysqld
     environment:
       MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'

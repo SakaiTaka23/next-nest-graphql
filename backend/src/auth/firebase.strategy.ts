@@ -15,7 +15,7 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
   }
 
   async validate(req: Request): Promise<string> {
-    const authHeader: string = req.headers.authorization;
+    const authHeader: string = req.headers.get('authorization');
     if (!authHeader) throw new UnauthorizedException();
     const token = authHeader.replace('Bearer ', '');
     const decodedToken = await admin

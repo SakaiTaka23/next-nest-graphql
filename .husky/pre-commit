@@ -1,0 +1,12 @@
+#!/bin/sh
+."$(dirmname "$0")/_/husky.sh"
+
+cd `pwd`
+
+cd backend
+yarn lint-staged
+cd ..
+
+cd frontend
+yarn lint-staged
+cd ..

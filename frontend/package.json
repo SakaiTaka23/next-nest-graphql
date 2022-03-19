@@ -7,7 +7,6 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "next lint --dir src --fix",
-    "lint-staged": "lint-staged",
     "format": "prettier --write --ignore-path .gitignore './**/*.{ts,tsx,json}'",
     "generate": "graphql-codegen --config codegen.yml"
   },

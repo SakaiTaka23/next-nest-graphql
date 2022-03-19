@@ -30,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   const theme = useMemo(
-    () =
+    () =>
       createTheme({
         palette: {
           mode: prefersDarkMode ? 'dark' : 'light',

@@ -1,5 +1,6 @@
-import { TextField, Typography } from '@mui/material';
 import React from 'react';
+
+import { TextField, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const EmailInput = () => {

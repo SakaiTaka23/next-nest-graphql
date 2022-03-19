@@ -1,5 +1,7 @@
-import { Button, Grid } from '@mui/material';
 import React from 'react';
+
+import { Button, Grid } from '@mui/material';
+
 import { useFirebase } from '@/firebase/useFirebase';
 
 const AuthLinks = () => {

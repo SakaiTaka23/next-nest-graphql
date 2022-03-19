@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { useFirebase } from '@/firebase/useFirebase';
 
-const Logout = () => {
+const LogoutPage = () => {
   const { Logout } = useFirebase();
 
   return (
@@ -12,4 +13,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default LogoutPage;

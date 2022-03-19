@@ -1,5 +1,7 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createContext, ReactNode, useEffect, useState, VFC } from 'react';
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 import firebaseApp from './firebase';
 
 type Props = {

@@ -1,9 +1,11 @@
+import { useEffect, useMemo } from 'react';
+
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { createTheme, CssBaseline, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
-import { useEffect, useMemo } from 'react';
+
 import { AuthProvider } from '@/firebase/authContext';
 
 const httpLink = createHttpLink({

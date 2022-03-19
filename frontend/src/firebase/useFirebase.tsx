@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
+
 import firebaseApp from './firebase';
 
 const useFirebase = () => {
@@ -20,7 +21,7 @@ const useFirebase = () => {
 
   const SignUp = async (email: string, password: string) => {
     await createUserWithEmailAndPassword(firebaseAuth, email, password).then((user_credential) => {
-      user_credential.user.getIdToken(true).then((token) => {
+      user_credential.user.getIdToken(true).then(() => {
         // TODO バックと通信
         router.replace('/private');
       });
@@ -41,7 +42,7 @@ const useFirebase = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(firebaseAuth, provider)
       .then((user_credential) => {
-        user_credential.user.getIdToken(true).then((token) => {
+        user_credential.user.getIdToken(true).then(() => {
           // TODO バックと通信
           router.replace('/private');
         });

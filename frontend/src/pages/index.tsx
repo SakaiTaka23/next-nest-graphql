@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+
 import { useUserFromIdQuery } from '@/graphql/generated';
 
 const Home: NextPage = () => {
@@ -9,7 +10,6 @@ const Home: NextPage = () => {
   });
 
   if (loading) return <p>Loading...</p>;
-  console.log(error);
   if (error) return <p>Error :(</p>;
 
   return <div>{`user id : ${data?.user?.id}`}</div>;

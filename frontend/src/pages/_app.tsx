@@ -1,12 +1,19 @@
-import { useEffect, useMemo } from 'react';
-
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { createTheme, CssBaseline, useMediaQuery } from '@mui/material';
+import { EmotionCache } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import type { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 
+import createEmotionCache from '@/cache/createEmotionCache';
 import { AuthProvider } from '@/firebase/authContext';
+import theme from '@/styles/theme/theme';
+
+const clientSideEmotionCache = createEmotionCache();
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
 const httpLink = createHttpLink({
   uri: 'http://127.0.0.1:5000/graphql',
@@ -28,36 +35,20 @@ const client = new ApolloClient({
   connectToDevTools: true,
 });
 
-function App({ Component, pageProps }: AppProps) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
-        },
-      }),
-    [prefersDarkMode]
-  );
-
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
-  }, []);
+function App(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AuthProvider>
-        <ApolloProvider client={client}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <ApolloProvider client={client}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

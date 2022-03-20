@@ -1,44 +1,36 @@
 FROM node:17-alpine AS dev
-
 WORKDIR /app
-
 COPY package.json yarn.lock ./
 RUN yarn install
-
 COPY . .
-
 EXPOSE 3000
+CMD ["yarn", "dev"]
 
-CMD ["yarn","dev"]
+
+FROM node:17-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 
 FROM node:17-alpine AS builder
-
 WORKDIR /app
-
-COPY package.json yarn.lock ./
-
-RUN yarn install --frozen-lockfile
-
-ENV NODE_ENV=production
-
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN ["yarn", "next", "build"]
+RUN yarn build
 
 
 FROM node:17-alpine AS production
-
 WORKDIR /app
-
-ENV NODE_ENV=production
-
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/yarn.lock ./
+ENV NODE_ENV production
+RUN addgroup --system --gid 1001 nodejs \
+    && adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
-
-RUN yarn install --frozen-lockfile
-
-COPY --from=builder /app/.next ./.next
-
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+USER nextjs
 EXPOSE 3000
-CMD ["yarn", "start"]
+ENV PORT 3000
+CMD ["node", "server.js"]

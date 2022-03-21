@@ -38,4 +38,4 @@ RUN yarn install --frozen-lockfile \
 COPY --from=builder /app/dist ./dist
 COPY joined.graphql ./dist/joined.graphql
 EXPOSE 5000
-# CMD ["bash", "./wait-db.sh", "node", "dist/main" ]
+CMD ["bash", "./wait-db.sh", "node", "dist/main" ]

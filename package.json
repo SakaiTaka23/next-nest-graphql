@@ -7,18 +7,5 @@
   "devDependencies": {
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts, tsx}": [
-      "yarn lint",
-      "yarn format",
-      "yarn lint:fix",
-      "yarn build"
-    ]
   }
 }

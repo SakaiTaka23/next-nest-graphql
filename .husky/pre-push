@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd `pwd`
+
+cd backend
+yarn build
+cd ..
+
+cd frontend
+yarn build
+cd ..

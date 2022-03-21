@@ -18,7 +18,12 @@ type SubmitData = {
 };
 
 export default function SignInForm() {
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   const { SignIn } = useFirebase();
 
   const submit = (data: SubmitData) => {

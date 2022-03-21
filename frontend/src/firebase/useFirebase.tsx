@@ -7,11 +7,14 @@ import {
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
 
+import { useCreateUserMutation } from '@/graphql/generated';
+
 import firebaseApp from './firebase';
 
 const useFirebase = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const router = useRouter();
+  const [createUserMutation] = useCreateUserMutation();
 
   const Logout = () => {
     firebaseAuth.signOut().then(() => {
@@ -22,7 +25,7 @@ const useFirebase = () => {
   const SignUp = async (email: string, password: string) => {
     await createUserWithEmailAndPassword(firebaseAuth, email, password).then((user_credential) => {
       user_credential.user.getIdToken(true).then(() => {
-        // TODO バックと通信
+        createUserMutation();
         router.replace('/private');
       });
     });
@@ -43,7 +46,7 @@ const useFirebase = () => {
     signInWithPopup(firebaseAuth, provider)
       .then((user_credential) => {
         user_credential.user.getIdToken(true).then(() => {
-          // TODO バックと通信
+          createUserMutation();
           router.replace('/private');
         });
       })

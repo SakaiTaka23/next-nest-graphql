@@ -12,7 +12,6 @@ export class UsersResolver {
   @UseGuards(FirebaseAuthGuard)
   @Mutation('createUser')
   create(@CurrentUserID() id: string) {
-    console.log(id);
     return this.usersService.create(id);
   }
 

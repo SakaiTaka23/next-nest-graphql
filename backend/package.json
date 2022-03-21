@@ -15,9 +15,13 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
-    "gen-typings": "ts-node src/generate-typings"
+    "gen-typings": "ts-node src/generate-typings",
+    "gen-merge": "ts-node src/merge-schemas",
+    "generate": "yarn gen-typings && yarn gen-merge"
   },
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.4",
     "@nestjs/apollo": "^10.0.7",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",

@@ -10,6 +10,7 @@
 - ESLint
 - Firebase Authentication
 - GraphQL
+- Husky
 - Prettier
 - TypeScript
 
@@ -30,55 +31,32 @@
 ## Getting Started
 
 1. execute command
-- for docker
 
 ```shell
-make install-docker
-```
-
-- for local
-
-```shell
-make install-local
+make install
 ```
 
 2. set up firebase
+
 - set firebase adminsdk as filename "firebase-adminsdk.json" in the src/auth folder(backend)
 - set firebase key in the .env file(frontend)
 
 3. start the server
 
-**with docker**
-
 ```shell
 docker compose up
 ```
 
-**local**
-
-```shell
-cd backend
-yarn dev
-```
-
-```shell
-cd frontend
-yarn dev
-```
-
-
-
-## Migration
-
-- in backend
-- for docker execute this command inside backend container
-
-```shell
-yarn prisma db push
-```
-
-
-
 ## Production(Docker)
 
-- change docker-compose target to 'production'
+1. build docker container
+
+```shell
+make build-prod
+```
+
+**to test**
+
+```shell
+make up-prod
+```

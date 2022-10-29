@@ -1,8 +1,0 @@
-# Environment Variables
-.env
-
-# mysql data
-db/data
-
-# node modules
-node_modules

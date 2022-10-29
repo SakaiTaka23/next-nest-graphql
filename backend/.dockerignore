@@ -1,5 +1,0 @@
-.env.example
-.dockerignore
-dist
-Dockerfile
-node_modules

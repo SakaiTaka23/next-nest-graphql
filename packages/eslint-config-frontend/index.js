@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['next/core-web-vitals', 'turbo', 'airbnb', 'airbnb-typescript', 'prettier'],
+  extends: ['next/core-web-vitals', 'airbnb', 'airbnb-typescript', 'base'],
   settings: {
     react: {
       version: 'detect',

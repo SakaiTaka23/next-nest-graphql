@@ -19,6 +19,7 @@
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "eslint-config-custom-frontend": "*",
+    "tsconfig-custom": "*",
     "typescript": "4.8.4"
   }
 }

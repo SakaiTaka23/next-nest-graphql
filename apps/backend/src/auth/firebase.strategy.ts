@@ -6,8 +6,7 @@ import * as admin from 'firebase-admin';
 import { ExtractJwt, JwtFromRequestFunction } from 'passport-jwt';
 import { Strategy } from 'passport-strategy';
 import { ParsedQs } from 'qs';
-
-import * as serviceAccount from './firebase-adminsdk.json';
+import * as serviceAccount from 'src/firebase-adminsdk.json';
 
 @Injectable()
 export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {

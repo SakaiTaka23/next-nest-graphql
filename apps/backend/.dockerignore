@@ -1,0 +1,6 @@
+.env.example
+.dockerignore
+.turbo
+dist
+Dockerfile
+node_modules

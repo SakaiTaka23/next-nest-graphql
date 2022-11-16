@@ -1,0 +1,11 @@
+query UserFromToken {
+  userFromToken {
+    id
+  }
+}
+
+query UserFromID($userId: String!) {
+  user(id: $userId) {
+    id
+  }
+}

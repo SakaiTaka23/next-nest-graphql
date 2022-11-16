@@ -2,10 +2,16 @@
   "name": "next-nest-graphql",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@nestjs",
+      "**/@nestjs/**"
+    ]
+  },
   "scripts": {
     "dev:front": "yarn workspace frontend dev",
     "dev:back": "yarn workspace backend dev",

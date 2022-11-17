@@ -16,5 +16,12 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-key': 'off',
+    'import/extensions': [
+      'error',
+      {
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
 };

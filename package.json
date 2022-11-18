@@ -16,6 +16,7 @@
     "dev:front": "yarn workspace frontend dev",
     "dev:back": "yarn workspace backend dev",
     "dev": "turbo run dev --parallel",
+    "prod": "turbo run prod --parallel",
     "build": "turbo run build",
     "format": "turbo run format",
     "lint": "turbo run lint"

@@ -30,6 +30,9 @@
     },
     "dev": {
       "cache": false
+    },
+    "prod": {
+      "cache": false
     }
   }
 }

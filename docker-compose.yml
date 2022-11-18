@@ -7,6 +7,7 @@ services:
       dockerfile: ./apps/frontend/Dockerfile
     ports:
       - 3000:3000
+    tty: true
   backend:
     container_name: backend
     build:
@@ -14,7 +15,6 @@ services:
       dockerfile: ./apps/backend/Dockerfile
     ports:
       - 4000:4000
-    tty: true
   db:
     image: mysql:8.0
     platform: linux/x86_64

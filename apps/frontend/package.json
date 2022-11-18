@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prod": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{ts,tsx,json}'",
     "generate": "graphql-codegen --config codegen.ts"

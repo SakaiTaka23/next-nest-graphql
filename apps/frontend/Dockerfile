@@ -29,4 +29,4 @@ COPY --from=installer /app/apps/frontend/next.config.js .
 COPY --from=installer /app/apps/frontend/package.json .
 COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/frontend/.next/static ./apps/frontend/.next/static
-# CMD ["yarn", "prod"]
+CMD ["node","apps/frontend/server.js"]

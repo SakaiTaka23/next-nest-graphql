@@ -1,0 +1,18 @@
+{
+  "extends": ["config:base"],
+  "timezone": "Asia/Tokyo",
+  "schedule": "every 3 months on the first day of the month",
+  "labels": ["renovate"],
+  "packageRules": [
+    {
+      "groupName": "major dependencies",
+      "matchUpdateTypes": "major",
+      "addLabels": ["major-update"]
+    },
+    {
+      "groupName": "minor dependencies",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest", "lockFileMaintenance"],
+      "automerge": true
+    }
+  ]
+}

@@ -7,7 +7,6 @@ services:
       dockerfile: ./apps/frontend/Dockerfile
     ports:
       - 3000:3000
-    tty: true
   backend:
     container_name: backend
     build:

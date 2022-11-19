@@ -15,6 +15,7 @@ COPY turbo.json turbo.json
 COPY .gitignore .gitignore
 RUN yarn turbo run build --filter=backend...
 
+
 FROM node:19 AS runner
 RUN apt-get update \
     && apt-get install -y netcat --no-install-recommends \

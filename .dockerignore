@@ -2,3 +2,4 @@
 *docker-compose*
 .vscode
 .dockerignore
+node_modules

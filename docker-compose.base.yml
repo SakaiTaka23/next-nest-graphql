@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  turbo-app-base:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/apps
+      - mono-node-modules:/apps/node_modules

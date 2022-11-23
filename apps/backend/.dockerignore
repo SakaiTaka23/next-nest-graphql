@@ -1,4 +1,0 @@
-.env.example
-.dockerignore
-dist
-Dockerfile

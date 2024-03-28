@@ -6,7 +6,7 @@
   "devDependencies": {
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-turbo": "^0.0.4",
+    "eslint-config-turbo": "^0.0.10",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.7.1"

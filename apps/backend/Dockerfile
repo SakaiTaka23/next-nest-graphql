@@ -1,11 +1,11 @@
-FROM node:19 AS builder
+FROM node:20 AS builder
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope=backend --docker
 
 
-FROM node:19 AS installer
+FROM node:20 AS installer
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
@@ -16,7 +16,7 @@ COPY .gitignore .gitignore
 RUN yarn turbo run build --filter=backend...
 
 
-FROM node:19 AS runner
+FROM node:20 AS runner
 RUN apt-get update \
     && apt-get install -y netcat --no-install-recommends \
     && apt-get clean \

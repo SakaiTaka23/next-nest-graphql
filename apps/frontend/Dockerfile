@@ -1,4 +1,4 @@
-FROM node:19-alpine AS builder
+FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat \
     && apk update
 WORKDIR /app
@@ -7,7 +7,7 @@ COPY . .
 RUN turbo prune --scope=frontend --docker
 
 
-FROM node:19-alpine AS installer
+FROM node:20-alpine AS installer
 RUN apk add --no-cache libc6-compat \
     && apk update
 WORKDIR /app
@@ -20,7 +20,7 @@ COPY turbo.json turbo.json
 RUN yarn turbo run build --filter=frontend...
 
 
-FROM node:19-alpine AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 nextjs
